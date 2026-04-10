@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+/* Center */
+.center {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+}
+
+/* Title */
+h1 {
+    font-size: 7vw;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px cyan; }
+    to { text-shadow: 0 0 30px magenta; }
+}
+
+/* Slideshow */
+.slideshow {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+}
+
+.slideshow img {
+    width: 60%;
+    max-width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px white;
+    animation: fade 3s;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Message */
+.msg {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    font-size: 5vw;
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: red;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+    <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+</div>
+
+<div class="slideshow">
+    <img id="photo" src="photo1.jpg">
+</div>
+
+<div class="msg" id="msg"></div>
+
+<audio autoplay loop id="music" src="https://www.myinstants.com/media/sounds/happy-birthday-to-you.mp3"></audio>
+
+<script>
+
+// 👉 Yaha apni photos ke naam daal
+let photos = ["photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg"];
+
+let index = 0;
+
+function changePhoto() {
+    index = (index + 1) % photos.length;
+    let img = document.getElementById("photo");
+    img.src = photos[index];
+}
+
+setInterval(changePhoto, 2500);
+
+/* Typing message */
+let text = "Shetty Annaa🔥🔥🔥😎😎";
+let i = 0;
+
+function type() {
+    if(i < text.length){
+        document.getElementById("msg").innerHTML += text[i];
+        i++;
+        setTimeout(type, 50);
+    }
+}
+
+type();
+
+/* Confetti */
+for(let i=0; i<80; i++){
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = randomColor();
+    c.style.animationDuration = (2 + Math.random()*3) + "s";
+    document.body.appendChild(c);
+}
+
+function randomColor(){
+    let colors = ["red","yellow","blue","green","pink","cyan"];
+    return colors[Math.floor(Math.random()*colors.length)];
+}
+
+</script>
+
+</body>
+</html>
